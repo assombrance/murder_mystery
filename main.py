@@ -28,7 +28,9 @@ def load_image(name: str | Path, is_char: bool = False):
 
 
 def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
-    font = pg.font.Font(None, 24)
+    if text == "":
+        return
+    font = pg.font.Font("resources/SpecialElite-Regular.ttf", 20)
 
     if text_color is None:
         text_color = BLACK
@@ -43,18 +45,19 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
             DIALOGUE_BOX_HEIGHT,
         ),
     )
-    rendered_text = font.render(text, True, text_color)
+    rendered_text = font.render(
+        text, True, text_color, wraplength=DIALOGUE_BOX_WIDTH - 50
+    )
     text_rect = rendered_text.get_rect(
         center=(WIDTH // 2, HEIGHT - 10 - DIALOGUE_BOX_HEIGHT // 2)
     )
-    if text != "":
-        screen.blit(rendered_text, text_rect)
+    screen.blit(rendered_text, text_rect)
 
 
 # here's the full code
 def main():
 
-    with open("resources/Dialogues.txt") as f:
+    with open("resources/Dialogues.txt", encoding="utf-8") as f:
         dialog = f.readlines()
     dialog.insert(0, "")
 

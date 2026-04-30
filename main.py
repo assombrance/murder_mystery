@@ -68,13 +68,8 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
 
     player = load_image("player1.gif")
-    entity = load_image("alien1.gif")
-    background = load_image("liquid.bmp")
-
-    # scale the background image so that it fills the window and
-    # successfully overwrites the old sprite position.
-    background = pg.transform.scale2x(background)
-    background = pg.transform.scale2x(background)
+    # entity = load_image("alien1.gif")
+    background = load_image("auberge_exterieur.png")
 
     screen.blit(background, (0, 0))
 

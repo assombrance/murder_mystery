@@ -47,11 +47,17 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
     text_rect = rendered_text.get_rect(
         center=(WIDTH // 2, HEIGHT - 10 - DIALOGUE_BOX_HEIGHT // 2)
     )
-    screen.blit(rendered_text, text_rect)
+    if text != "":
+        screen.blit(rendered_text, text_rect)
 
 
 # here's the full code
 def main():
+
+    with open("resources/Dialogues.txt") as f:
+        dialog = f.readlines()
+    dialog.insert(0, "")
+
     pg.init()
     manager = ui.UIManager((WIDTH, HEIGHT))
 
@@ -68,8 +74,7 @@ def main():
     screen.blit(background, (0, 0))
 
     pg.display.set_caption("Move It!")
-    text = "hello"
-    final_text = "world"
+    dialog_index = 0
 
     # This is a simple event handler that enables player input.
     while True:
@@ -78,15 +83,14 @@ def main():
         char = characters["Ted"]
         screen.blit(char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10))
 
-        display_text(text)
+        display_text(dialog[dialog_index])
 
         for e in pg.event.get():
             keys = pg.key.get_pressed()
             if e.type == pg.QUIT or keys[pg.K_q]:
                 return
-            if keys[pg.K_t]:
-                text = final_text
-        # screen.blit(p.image, p.pos)
+            if keys[pg.K_SPACE]:
+                dialog_index += 1
         clock.tick(60)
         pg.display.update()
         pg.time.delay(20)

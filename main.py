@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-from typing import Any, Callable, Optional
+from random import randint
+from typing import Optional
 
 import pygame as pg
 import pygame_gui as ui
@@ -57,35 +58,52 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
     screen.blit(rendered_text, text_rect)
 
 
-def button(label: str, action: Callable[[str], Any], position: tuple[int, int]):
-    ui.elements.UIButton(position, label, command=action)
-
-
-def minigame(word: str, letters: str):
-    display_text("")
+def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
     current_guess = []
+    buttons: list[ui.elements.UIButton] = []
     for letter in letters:
-        pos = (0, 0)
-        button(letter, lambda l: current_guess.append(l), pos)
-    display_text("".join(current_guess))
+        pos = (randint(20, WIDTH - 60), randint(20, HEIGHT // 2))
+        buttons.append(
+            ui.elements.UIButton(
+                (*pos, 40, 40), letter, manager, object_id=str(randint(0, 10000))
+            )
+        )
     while "".join(current_guess) != word:
-        display_text("".join(current_guess))
-        if len(current_guess) == len(word):
+        time_delta = clock.tick(60) / 1000.0
+        e = pg.event.wait()
+        if e.type == pg.QUIT:
+            exit(0)
+        if e.type == ui.UI_BUTTON_PRESSED:
+            current_guess.append(e.ui_element.text)
+            e.ui_element.disable()
+
+        manager.process_events(e)
+        manager.update(time_delta)
+        manager.draw_ui(screen)
+
+        guess = "".join(current_guess)
+        display_text(guess)
+        if guess == word:
+            for button in buttons:
+                button.kill()
+                del button
+            pg.display.update()
+            pg.time.delay(1_000)
+            return
+        if len(guess) == len(word):
             current_guess = []
-    pg.event.wait()
+            for button in buttons:
+                button.enable()
+        pg.display.update()
 
 
-# here's the full code
 def main():
-
     with open("resources/Dialogues.txt", encoding="utf-8") as f:
-        dialog = f.readlines()
-    dialog.insert(0, "")
+        dialog = [l.strip() for l in f.readlines()]
 
     pg.init()
-    manager = ui.UIManager((WIDTH, HEIGHT))
-
     clock = pg.time.Clock()
+    manager = ui.UIManager((WIDTH, HEIGHT), "ui_theme.json")
 
     characters: dict[str, pg.Surface] = {}
     for f_name in (Path(main_dir) / "resources/personnages").iterdir():
@@ -98,18 +116,17 @@ def main():
     screen.blit(background, (0, 0))
 
     pg.display.set_caption("Move It!")
-    pg.event.set_blocked(None)
-    pg.event.set_allowed([pg.TEXTINPUT, pg.QUIT, pg.MOUSEBUTTONDOWN])
+    pg.event.set_blocked([pg.KEYDOWN, pg.KEYUP])
 
     dialog_index = 0
     minigame_index = 0
     char = characters["Ted"]
 
     while True:
-        print(dialog[dialog_index], dialog[dialog_index] == "__G__")
         if dialog[dialog_index] == "__G__":
-            minigame(*words[minigame_index])
+            minigame(*words[minigame_index], manager, clock)
             minigame_index += 1
+            dialog_index += 1
         else:
             screen.blit(background, (0, 0))
             screen.blit(
@@ -123,6 +140,8 @@ def main():
             return
         if keys[pg.K_SPACE]:
             dialog_index += 1
+        pg.display.update()
+        clock.tick(60)
 
 
 if __name__ == "__main__":

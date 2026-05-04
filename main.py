@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from random import randint
 from typing import Optional
@@ -6,7 +5,7 @@ from typing import Optional
 import pygame as pg
 import pygame_gui as ui
 
-main_dir = os.path.split(os.path.abspath(__file__))[0]
+main_dir = Path(__file__).absolute().parent
 
 
 # Height and Width of screen
@@ -25,10 +24,8 @@ screen = pg.display.set_mode((WIDTH, HEIGHT))
 words = [("COGNAC", "CUGTNIAROC")]
 
 
-# quick function to load an image
-def load_image(name: str | Path, is_char: bool = False):
-    path = os.path.join(main_dir, "resources", name)
-    return pg.image.load(path).convert_alpha()
+def load_image(name: str | Path):
+    return pg.image.load(main_dir / "resources" / name).convert_alpha()
 
 
 def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
@@ -58,7 +55,7 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
     screen.blit(rendered_text, text_rect)
 
 
-def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
+def mini_game(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
     current_guess = []
     buttons: list[ui.elements.UIButton] = []
     for letter in letters:
@@ -107,7 +104,7 @@ def main():
 
     characters: dict[str, pg.Surface] = {}
     for f_name in (Path(main_dir) / "resources/personnages").iterdir():
-        characters[f_name.stem] = pg.transform.scale_by(load_image(f_name, True), 0.5)
+        characters[f_name.stem] = pg.transform.scale_by(load_image(f_name), 0.5)
 
     background = pg.transform.scale(
         load_image("lieux/auberge_exterieur.png"), (WIDTH, HEIGHT)
@@ -124,7 +121,7 @@ def main():
 
     while True:
         if dialog[dialog_index] == "__G__":
-            minigame(*words[minigame_index], manager, clock)
+            mini_game(*words[minigame_index], manager, clock)
             minigame_index += 1
             dialog_index += 1
         else:

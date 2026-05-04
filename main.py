@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Any, Callable, Optional
 
 import pygame as pg
 import pygame_gui as ui
@@ -19,6 +19,9 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 screen = pg.display.set_mode((WIDTH, HEIGHT))
+
+
+words = [("COGNAC", "CUGTNIAROC")]
 
 
 # quick function to load an image
@@ -54,6 +57,24 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
     screen.blit(rendered_text, text_rect)
 
 
+def button(label: str, action: Callable[[str], Any], position: tuple[int, int]):
+    ui.elements.UIButton(position, label, command=action)
+
+
+def minigame(word: str, letters: str):
+    display_text("")
+    current_guess = []
+    for letter in letters:
+        pos = (0, 0)
+        button(letter, lambda l: current_guess.append(l), pos)
+    display_text("".join(current_guess))
+    while "".join(current_guess) != word:
+        display_text("".join(current_guess))
+        if len(current_guess) == len(word):
+            current_guess = []
+    pg.event.wait()
+
+
 # here's the full code
 def main():
 
@@ -77,26 +98,31 @@ def main():
     screen.blit(background, (0, 0))
 
     pg.display.set_caption("Move It!")
+    pg.event.set_blocked(None)
+    pg.event.set_allowed([pg.TEXTINPUT, pg.QUIT, pg.MOUSEBUTTONDOWN])
+
     dialog_index = 0
+    minigame_index = 0
+    char = characters["Ted"]
 
-    # This is a simple event handler that enables player input.
     while True:
-        # Draw the background
-        screen.blit(background, (0, 0))
-        char = characters["Ted"]
-        screen.blit(char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10))
+        print(dialog[dialog_index], dialog[dialog_index] == "__G__")
+        if dialog[dialog_index] == "__G__":
+            minigame(*words[minigame_index])
+            minigame_index += 1
+        else:
+            screen.blit(background, (0, 0))
+            screen.blit(
+                char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10)
+            )
+            display_text(dialog[dialog_index])
 
-        display_text(dialog[dialog_index])
-
-        for e in pg.event.get():
-            keys = pg.key.get_pressed()
-            if e.type == pg.QUIT or keys[pg.K_q]:
-                return
-            if keys[pg.K_SPACE]:
-                dialog_index += 1
-        clock.tick(60)
-        pg.display.update()
-        pg.time.delay(20)
+        e = pg.event.wait()
+        keys = pg.key.get_pressed()
+        if e.type == pg.QUIT or keys[pg.K_q]:
+            return
+        if keys[pg.K_SPACE]:
+            dialog_index += 1
 
 
 if __name__ == "__main__":

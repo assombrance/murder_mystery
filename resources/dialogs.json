@@ -76,6 +76,12 @@
     "type": "line",
     "text": "Qu'est-ce que vous avez à me regarder comme ça ?"
   },
+  {
+    "type": "minigame",
+    "text": "Où avez-vous vu cette femme ?",
+    "word": "CINEMA",
+    "letters": "MCINEARTOL"
+  },
   { "type": "line", "text": "Soit, j'avoue. Lexi Farrington, c'est moi." },
   {
     "type": "line",
@@ -118,6 +124,11 @@
   { "type": "line", "text": "* Bon sang, ça vient d'à côté ! *" },
   { "type": "line", "text": "* Vite, où sont mes clefs ? *" },
   {
+    "type": "minigame",
+    "word": "POCHE",
+    "letters": "HOPECARTLS"
+  },
+  {
     "type": "line",
     "text": "Pardon, je suis confuse… J'ai entendu un cri, et…"
   },
@@ -128,6 +139,11 @@
   { "type": "line", "text": "JENKINS !!" },
   { "type": "line", "text": "C'est fermé à clef !" },
   { "type": "line", "text": "Aidez-moi à enfoncer la porte !" },
+  {
+    "type": "minigame",
+    "word": "GAUCHE",
+    "letters": "HEXGUACMEO"
+  },
   { "type": "line", "text": "Au fait, je m'appelle Daisy White !" },
   {
     "type": "line",

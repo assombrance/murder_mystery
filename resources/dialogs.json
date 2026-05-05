@@ -22,6 +22,7 @@
   },
   {
     "type": "line",
+    "character": "Richard",
     "text": "On noie son chagrin dans l'alcool, hein ? Je le comprends, cher ami, je le comprends…"
   },
   { "type": "line", "text": "Quel triste monde que le nôtre." },
@@ -47,14 +48,15 @@
     "type": "line",
     "text": "Si vous saviez le nombre d'assassins que j'ai rencontrés…"
   },
-  { "type": "line", "text": "Un problème, Jenkins ?" },
-  { "type": "line", "text": "…" },
+  { "type": "line", "character": "Casetti", "text": "Un problème, Jenkins ?" },
+  { "type": "line", "character": "Richard", "text": "…" },
   {
     "type": "line",
     "text": "Il se fait tard… Je… Je devrais aller me coucher."
   },
   {
     "type": "line",
+    "character": "Casetti",
     "text": "Je déteste ce genre de femmelette. Tout dans la cervelle, rien dans les tripes."
   },
   {
@@ -69,9 +71,9 @@
     "type": "line",
     "text": "Bon, assez ri. Ted ! Un double whisky, et que ça saute."
   },
-  { "type": "line", "text": "Tu as sûrement assez bu, Casetti…" },
+  { "type": "line", "character": "Ted", "text": "Tu as sûrement assez bu, Casetti…" },
   { "type": "line", "text": "… mais soit." },
-  { "type": "line", "text": "…" },
+  { "type": "line", "character": "Lexi", "text": "…" },
   {
     "type": "line",
     "text": "Qu'est-ce que vous avez à me regarder comme ça ?"

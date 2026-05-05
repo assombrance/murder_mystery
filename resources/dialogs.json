@@ -1,5 +1,10 @@
 [
-  { "type": "line", "text": "Bienvenue, voyageur.", "character": "Ted" },
+  {
+    "type": "line",
+    "text": "Bienvenue, voyageur.",
+    "character": "Ted",
+    "music": "jazz.wav"
+  },
   { "type": "line", "text": "Vous avez dû faire un bien pénible voyage…" },
   {
     "type": "line",

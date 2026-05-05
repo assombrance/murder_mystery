@@ -123,7 +123,7 @@ def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
 
 
 def play_music(song_name: str):
-    pg.mixer.music.load(song_name)
+    pg.mixer.music.load(resources / "audios" / song_name)
     pg.mixer.music.play(loops=-1)
 
 
@@ -149,14 +149,15 @@ def main():
     pg.event.set_blocked([pg.KEYDOWN, pg.KEYUP])
 
     dialog_index = 0
+    line = dialog[dialog_index]
+    if line.music is not None:
+        play_music(line.music)
+    char = None
 
     while True:
-        line = dialog[dialog_index]
-        if line.music is not None:
-            play_music(line.music)
-        screen.blit(background, (0, 0))
         if line.character is not None:
             char = characters[line.character]
+            screen.blit(background, (0, 0))
             screen.blit(
                 char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10)
             )
@@ -164,6 +165,12 @@ def main():
         if isinstance(line, Minigame):
             minigame(line.word, line.letters, manager, clock)
             dialog_index += 1
+            line = dialog[dialog_index]
+            screen.blit(background, (0, 0))
+            if char is not None:
+                screen.blit(
+                    char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10)
+                )
 
         e = pg.event.wait()
         keys = pg.key.get_pressed()
@@ -171,6 +178,9 @@ def main():
             return
         if keys[pg.K_SPACE]:
             dialog_index += 1
+            line = dialog[dialog_index]
+            if line.music is not None:
+                play_music(line.music)
         pg.display.update()
         clock.tick(60)
 

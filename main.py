@@ -122,6 +122,11 @@ def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
         pg.display.update()
 
 
+def play_music(song_name: str):
+    pg.mixer.music.load(song_name)
+    pg.mixer.music.play(loops=-1)
+
+
 def main():
     with open(resources / "dialogs.json", encoding="utf-8") as f:
         dialog = Scenario.model_validate_json(f.read()).root
@@ -144,12 +149,17 @@ def main():
     pg.event.set_blocked([pg.KEYDOWN, pg.KEYUP])
 
     dialog_index = 0
-    char = characters["Ted"]
 
     while True:
         line = dialog[dialog_index]
+        if line.music is not None:
+            play_music(line.music)
         screen.blit(background, (0, 0))
-        screen.blit(char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10))
+        if line.character is not None:
+            char = characters[line.character]
+            screen.blit(
+                char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10)
+            )
         display_text(line.text)
         if isinstance(line, Minigame):
             minigame(line.word, line.letters, manager, clock)

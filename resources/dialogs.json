@@ -122,9 +122,9 @@
   { "type": "line", "text": "* … *" },
   { "type": "line", "text": "* … *" },
   { "type": "line", "text": "* Bon sang, ça vient d'à côté ! *" },
-  { "type": "line", "text": "* Vite, où sont mes clefs ? *" },
   {
     "type": "minigame",
+    "text": "* Vite, où sont mes clefs ? *",
     "word": "POCHE",
     "letters": "HOPECARTLS"
   },
@@ -138,9 +138,9 @@
   { "type": "line", "text": "Ça venait de la chambre de Richard !" },
   { "type": "line", "text": "JENKINS !!" },
   { "type": "line", "text": "C'est fermé à clef !" },
-  { "type": "line", "text": "Aidez-moi à enfoncer la porte !" },
   {
     "type": "minigame",
+    "text": "Aidez-moi à enfoncer la porte !",
     "word": "GAUCHE",
     "letters": "HEXGUACMEO"
   },

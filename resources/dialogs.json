@@ -1,0 +1,157 @@
+[
+  { "type": "line", "text": "Bienvenue, voyageur.", "character": "Ted" },
+  { "type": "line", "text": "Vous avez dû faire un bien pénible voyage…" },
+  {
+    "type": "line",
+    "text": "Je n'avais jamais vu autant de pluie ces dernières années."
+  },
+  {
+    "type": "line",
+    "text": "Mais laissez-moi me présenter : je m'appelle Ted, je suis le patron de l'auberge."
+  },
+  {
+    "type": "minigame",
+    "text": "Auriez-vous envie d'un petit remontant ? Je vous offre votre premier verre chez nous !",
+    "word": "COGNAC",
+    "letters": "CUGTNIAROC"
+  },
+  {
+    "type": "line",
+    "text": "On noie son chagrin dans l'alcool, hein ? Je le comprends, cher ami, je le comprends…"
+  },
+  { "type": "line", "text": "Quel triste monde que le nôtre." },
+  { "type": "line", "text": "Richard Jenkins, enchanté." },
+  {
+    "type": "line",
+    "text": "Vous me connaissez sans doute pour mes nombreuses recherches en neurologie…"
+  },
+  {
+    "type": "line",
+    "text": "Pas plus tard qu'hier, je donnais une conférence sur un sujet passionnant : le crime."
+  },
+  { "type": "line", "text": "Vous vous y connaissez ?" },
+  {
+    "type": "line",
+    "text": "Non, évidemment… Lire Agatha Christie ne suffit pas."
+  },
+  {
+    "type": "line",
+    "text": "Il faut une réelle connaissance de l'esprit humain."
+  },
+  {
+    "type": "line",
+    "text": "Si vous saviez le nombre d'assassins que j'ai rencontrés…"
+  },
+  { "type": "line", "text": "Un problème, Jenkins ?" },
+  { "type": "line", "text": "…" },
+  {
+    "type": "line",
+    "text": "Il se fait tard… Je… Je devrais aller me coucher."
+  },
+  {
+    "type": "line",
+    "text": "Je déteste ce genre de femmelette. Tout dans la cervelle, rien dans les tripes."
+  },
+  {
+    "type": "line",
+    "text": "On s'est pas présentés. On m'appelle Leonardo Casetti."
+  },
+  {
+    "type": "line",
+    "text": "Les jaloux vous prétendront que je suis un mafieux…"
+  },
+  {
+    "type": "line",
+    "text": "Bon, assez ri. Ted ! Un double whisky, et que ça saute."
+  },
+  { "type": "line", "text": "Tu as sûrement assez bu, Casetti…" },
+  { "type": "line", "text": "… mais soit." },
+  { "type": "line", "text": "…" },
+  {
+    "type": "line",
+    "text": "Qu'est-ce que vous avez à me regarder comme ça ?"
+  },
+  { "type": "line", "text": "Soit, j'avoue. Lexi Farrington, c'est moi." },
+  {
+    "type": "line",
+    "text": "Je suis ici incognito. Je vous en supplie, ne me dénoncez pas !"
+  },
+  {
+    "type": "line",
+    "text": "J'avais besoin de vacances, loin de tout, de la célébrité…"
+  },
+  {
+    "type": "line",
+    "text": "Tenez, Lexi. Un martini, votre cocktail préféré."
+  },
+  { "type": "line", "text": "Merci, Pedro… John… Ted, pardon…" },
+  {
+    "type": "line",
+    "text": "Il faut lui pardonner, elle est d'un naturel fragile."
+  },
+  {
+    "type": "line",
+    "text": "Oui, je sais qui elle est… Elle m'en a fait le secret."
+  },
+  {
+    "type": "line",
+    "text": "De toute façon, personne ne va beaucoup au cinéma, par ici. Son anonymat est garanti."
+  },
+  { "type": "line", "text": "Mais il se fait tard, je devrais fermer le bar." },
+  {
+    "type": "line",
+    "text": "Pas si vite ! Un autre double whisky, et que ça saute ! J'ai une soif du tonnerre !"
+  },
+  { "type": "line", "text": "* C'est Casetti que j'entends ? *" },
+  { "type": "line", "text": "* Quel boucan ! *" },
+  {
+    "type": "line",
+    "text": "* J'espère seulement qu'il ne va pas chanter toute la nuit. *"
+  },
+  { "type": "line", "text": "* … *" },
+  { "type": "line", "text": "* … *" },
+  { "type": "line", "text": "* Bon sang, ça vient d'à côté ! *" },
+  { "type": "line", "text": "* Vite, où sont mes clefs ? *" },
+  {
+    "type": "line",
+    "text": "Pardon, je suis confuse… J'ai entendu un cri, et…"
+  },
+  { "type": "line", "text": "Ça semblait venir de la chambre 2 !" },
+  { "type": "line", "text": "N'est-ce pas celle du docteur Jenkins ?" },
+  { "type": "line", "text": "Qu'est-ce qui se passe ?! Qui a crié ?!" },
+  { "type": "line", "text": "Ça venait de la chambre de Richard !" },
+  { "type": "line", "text": "JENKINS !!" },
+  { "type": "line", "text": "C'est fermé à clef !" },
+  { "type": "line", "text": "Aidez-moi à enfoncer la porte !" },
+  { "type": "line", "text": "Au fait, je m'appelle Daisy White !" },
+  {
+    "type": "line",
+    "text": "Je suis arrivée cette nuit… mais je n'ai pas eu…"
+  },
+  { "type": "line", "text": "D'où vient tout ce raffut ?" },
+  { "type": "line", "text": "Ne… Ne venez pas voir ça… !" },
+  { "type": "line", "text": "N'entrez pas ! Restez en arrière !" },
+  { "type": "line", "text": "Richard… ! Il est mort !!" },
+  { "type": "line", "text": "On… On dirait qu'il a été poignardé…" },
+  { "type": "line", "text": "Lexi, reculez ! Tous, allez-vous-en !" },
+  { "type": "line", "text": "Je ne peux pas le croire…" },
+  { "type": "line", "text": "* Où est Casetti ? *" },
+  {
+    "type": "line",
+    "text": "Cette ordure ! C'est lui l'assassin, c'est lui qui l'a tué !"
+  },
+  {
+    "type": "line",
+    "text": "Vous avez vu comment il avait pris Jenkins en grippe !"
+  },
+  { "type": "line", "text": "Il va payer, le saligaud !" },
+  {
+    "type": "line",
+    "text": "Calmez-vous, Ted ! Tout le monde l'a entendu, il a braillé toute la nuit."
+  },
+  {
+    "type": "line",
+    "text": "* Comment… ? Qui a pu ? Ce pourrait être n'importe lequel d'entre eux… *"
+  },
+  { "type": "line", "text": "Chapitre 2 à suivre… " }
+]

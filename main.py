@@ -1,11 +1,41 @@
 from pathlib import Path
 from random import randint
-from typing import Optional
+from typing import Annotated, Literal, Optional
 
 import pygame as pg
 import pygame_gui as ui
+from pydantic import BaseModel, Field, RootModel
 
 main_dir = Path(__file__).absolute().parent
+resources = main_dir / "resources"
+
+
+class Line(BaseModel):
+    type: Literal["line"]
+    text: str
+    character: Optional[str] = None
+    background: Optional[str] = None
+    music: Optional[str] = None
+
+
+class Minigame(BaseModel):
+    type: Literal["minigame"]
+    text: str
+    word: str
+    letters: str
+    character: Optional[str] = None
+    background: Optional[str] = None
+    music: Optional[str] = None
+
+
+# class Scenario(BaseModel):
+#     lines: list[Annotated[Line | Minigame, Field(discriminator="type")]]
+
+
+class Scenario(
+    RootModel[list[Annotated[Line | Minigame, Field(discriminator="type")]]]
+):
+    pass
 
 
 # Height and Width of screen
@@ -21,11 +51,8 @@ WHITE = (255, 255, 255)
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 
-words = [("COGNAC", "CUGTNIAROC")]
-
-
 def load_image(name: str | Path):
-    return pg.image.load(main_dir / "resources" / name).convert_alpha()
+    return pg.image.load(resources / name).convert_alpha()
 
 
 def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
@@ -55,7 +82,7 @@ def display_text(text: str, text_color: Optional[tuple[int, int, int]] = None):
     screen.blit(rendered_text, text_rect)
 
 
-def mini_game(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
+def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
     current_guess = []
     buttons: list[ui.elements.UIButton] = []
     for letter in letters:
@@ -91,19 +118,20 @@ def mini_game(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
             current_guess = []
             for button in buttons:
                 button.enable()
+            display_text("Je ne vous comprend pas, pouvez vous répéter ?")
         pg.display.update()
 
 
 def main():
-    with open("resources/Dialogues.txt", encoding="utf-8") as f:
-        dialog = [l.strip() for l in f.readlines()]
+    with open(resources / "dialogs.json", encoding="utf-8") as f:
+        dialog = Scenario.model_validate_json(f.read()).root
 
     pg.init()
     clock = pg.time.Clock()
     manager = ui.UIManager((WIDTH, HEIGHT), "ui_theme.json")
 
     characters: dict[str, pg.Surface] = {}
-    for f_name in (Path(main_dir) / "resources/personnages").iterdir():
+    for f_name in (resources / "personnages").iterdir():
         characters[f_name.stem] = pg.transform.scale_by(load_image(f_name), 0.5)
 
     background = pg.transform.scale(
@@ -116,20 +144,16 @@ def main():
     pg.event.set_blocked([pg.KEYDOWN, pg.KEYUP])
 
     dialog_index = 0
-    minigame_index = 0
     char = characters["Ted"]
 
     while True:
-        if dialog[dialog_index] == "__G__":
-            mini_game(*words[minigame_index], manager, clock)
-            minigame_index += 1
+        line = dialog[dialog_index]
+        screen.blit(background, (0, 0))
+        screen.blit(char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10))
+        display_text(line.text)
+        if isinstance(line, Minigame):
+            minigame(line.word, line.letters, manager, clock)
             dialog_index += 1
-        else:
-            screen.blit(background, (0, 0))
-            screen.blit(
-                char, (100, HEIGHT - char.get_height() - DIALOGUE_BOX_HEIGHT - 10)
-            )
-            display_text(dialog[dialog_index])
 
         e = pg.event.wait()
         keys = pg.key.get_pressed()

@@ -118,7 +118,7 @@ def minigame(word: str, letters: str, manager: ui.UIManager, clock: pg.Clock):
             current_guess = []
             for button in buttons:
                 button.enable()
-            display_text("Je ne vous comprend pas, pouvez vous répéter ?")
+            display_text("Je ne vous comprends pas, pouvez-vous répéter ?")
         pg.display.update()
 
 
